@@ -15,7 +15,7 @@ import com.example.wb_week_five_1.R
 import com.example.wb_week_five_1.databinding.FragmentHeroesListBinding
 import com.example.wb_week_five_1.domain.Hero
 import com.example.wb_week_five_1.presentation.hero.HeroFragment
-
+import com.example.wb_week_five_1.presentation.info.InfoFragment
 
 class HeroesListFragment : Fragment() {
 
@@ -56,8 +56,17 @@ class HeroesListFragment : Fragment() {
 
     private fun initViews() {
         adapter = HeroesAdapter()
-        binding.rvHeroesList.adapter = adapter
-        binding.rvHeroesList.layoutManager = GridLayoutManager(context, 3)
+        binding.apply {
+            rvHeroesList.adapter = adapter
+            rvHeroesList.layoutManager = GridLayoutManager(context, 3)
+
+            btnInfo.setOnClickListener {
+                fm.beginTransaction()
+                    .addToBackStack("")
+                    .replace(R.id.main_container, InfoFragment())
+                    .commit()
+            }
+        }
     }
 
     private fun setupClickListener() {
